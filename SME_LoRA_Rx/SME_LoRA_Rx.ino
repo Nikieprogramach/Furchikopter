@@ -5,11 +5,14 @@
 #include<LiquidCrystal.h>
 #include <SPI.h>
 #include <LoRa.h>
+#include <Servo.h>
 #define ss 10
 #define rst 9
 #define dio0 2
 
 #define servoRudder 3
+
+Servo elevator;
 int counter = 0;
 
 
@@ -31,6 +34,8 @@ void setup() {
   LoRa.setSyncWord(0xF3);
   Serial.println("LoRa Initializing OK!");
   delay(3000);
+
+  elevator.attach(7);
 }
 
 int joyLR;
@@ -38,7 +43,7 @@ int joyUD;
 int joyTwist;
 
 char values[3];
-
+int lora_msg = 0;
 void loop() {
 
   // try to parse packet
@@ -60,10 +65,11 @@ void loop() {
 
       joyTwist = LoRaData.substring(LoRaData.lastIndexOf(",") + 1).toInt();
       Serial.println(joyTwist);
-
-      analogWrite(servoRudder, map(joyLR, 0, 1023, 0, 180));
-
-
+      lora_msg++;
+      Serial.println(lora_msg);
+      
+      elevator.write(map(joyUD, 0, 1023, 0, 180));
+      delay(15);
     
 
   // print RSSI of packet
