@@ -41,6 +41,7 @@ void setup() {
 int joyLR;
 int joyUD;
 int joyTwist;
+int motorSpeed;
 
 char values[3];
 int lora_msg = 0;
@@ -63,8 +64,11 @@ void loop() {
       joyUD = LoRaData.substring(LoRaData.indexOf(",") + 1,LoRaData.indexOf(",", LoRaData.indexOf(",") + 1)).toInt();
       Serial.println(joyUD);
 
-      joyTwist = LoRaData.substring(LoRaData.lastIndexOf(",") + 1).toInt();
+      joyTwist = LoRaData.substring(LoRaData.indexOf(",", LoRaData.indexOf(",") + 1) + 1, LoRaData.lastIndexOf(",")).toInt();
       Serial.println(joyTwist);
+
+      motorSpeed = LoRaData.substring(LoRaData.lastIndexOf(",") + 1).toInt();
+      Serial.println(motorSpeed);
       lora_msg++;
       Serial.println(lora_msg);
       

@@ -12,6 +12,7 @@
 #define joyLR A0
 #define joyUD A1
 #define joyTwist A2
+#define motorSpeed A3
 
 int counter = 0;
 
@@ -19,6 +20,7 @@ void setup() {
   pinMode(joyLR, INPUT);
   pinMode(joyUD, INPUT);
   pinMode(joyTwist, INPUT);
+  pinMode(motorSpeed, INPUT);
 
   //initialize Serial Monitor
   Serial.begin(9600);
@@ -46,6 +48,8 @@ void loop() {
   LoRa.print(analogRead(joyUD));
     LoRa.print(",");
   LoRa.print(analogRead(joyTwist));
+    LoRa.print(",");
+  LoRa.print(analogRead(motorSpeed));
   LoRa.endPacket();
 
   counter++;
