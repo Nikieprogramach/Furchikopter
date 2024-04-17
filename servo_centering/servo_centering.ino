@@ -6,7 +6,7 @@ Servo myservo;  // create servo object to control a servo
 int pos = 90;    // variable to store the servo position
 
 void setup() {
-  myservo.attach(7);  // attaches the servo on pin 9 to the servo object
+  myservo.attach(5);  // attaches the servo on pin 9 to the servo object
 }
 
 void loop() {
